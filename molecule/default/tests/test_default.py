@@ -2,9 +2,14 @@
 
 
 def test_hosts_file(host):
-    """Validate /etc/hosts file."""
-    f = host.file("/home/toni/.ssh/id_rsa")
+	"""Validate /etc/hosts file."""
+	rsa = host.file("/home/toni/.ssh/id_rsa")
+	dsa = host.file("/home/toni/.ssh/id_dsa")
 
-    assert f.exists
-    assert f.user == "toni"
-    assert f.group == "toni"
+	assert rsa.exists
+	assert rsa.user == "toni"
+	assert rsa.group == "toni"
+
+	assert dsa.exists
+	assert dsa.user == "toni"
+	assert dsa.group == "toni"

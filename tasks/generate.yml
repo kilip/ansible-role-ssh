@@ -1,0 +1,13 @@
+---
+- name: "{{ ssh_key_filename }} ~> generate SSH key"
+  become: true
+  become_user: "{{ ssh_key_user }}"
+  openssh_keypair:
+    path: "{{ ssh_private }}"
+    type: "{{ ssh_key_type }}"
+    size: "{{ ssh_key_size }}"
+    state: present
+    force: false
+
+- name: Backup generated ssh keys to "{{ ssh_backup_dir }}"
+  include_tasks: backup.yml

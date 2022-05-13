@@ -13,7 +13,7 @@ Role Variables
 ```yaml
 ssh_key_user: "root"
 ssh_key_type: rsa
-ssh_key_bits: 4096
+ssh_key_size: 4096
 ssh_key_dir: "/home/{{ ssh_key_user }}/.ssh"
 ssh_key_filename: "id_rsa"
 ssh_key_passphrase: ""

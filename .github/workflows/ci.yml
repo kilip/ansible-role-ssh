@@ -34,6 +34,9 @@ jobs:
         distro:
           - centos7
           - ubuntu2004
+          - debian9
+          - debian10
+          - debian11
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2

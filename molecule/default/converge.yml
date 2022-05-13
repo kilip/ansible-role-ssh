@@ -13,11 +13,22 @@
         group: "{{ ssh_key_user }}"
         create_home: true
         home: "/home/{{ ssh_key_user }}"
-
   tasks:
     - name: "Include kilip.ssh"
+      vars:
+        ssh_key_filename: "{{ item.filename }}"
+        ssh_key_type: "{{ item.type }}"
+        ssh_key_size: "{{ item.size }}"
       include_role:
         name: "kilip.ssh"
-
+      loop: "{{ ssh_key_files }}"
   vars:
     ssh_key_user: toni
+    ssh_backup_dir: "tmp/ssh-keys"
+    ssh_key_files:
+      - filename: id_rsa
+        type: rsa
+        size: 4096
+      - filename: id_dsa
+        type: dsa
+        size: 1024

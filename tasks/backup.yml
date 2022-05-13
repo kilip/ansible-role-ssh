@@ -1,0 +1,16 @@
+---
+- name: "{{ ssh_key_filename }} ~> backup private key"
+  fetch:
+    owner: "{{ ssh_key_user }}"
+    group: "{{ ssh_key_group }}"
+    src: "{{ ssh_private }}"
+    dest: "{{ ssh_private_backup }}"
+    flat: yes
+
+- name: "{{ ssh_key_filename }} ~> backup public key"
+  fetch:
+    owner: "{{ ssh_key_user }}"
+    group: "{{ ssh_key_group }}"
+    src: "{{ ssh_public }}"
+    dest: "{{ ssh_public_backup }}"
+    flat: yes
