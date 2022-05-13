@@ -24,6 +24,7 @@ provisioner:
     GITHUB_TOKEN: ${MOLECULE_GITHUB_TOKEN:-""}
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
-
+  config_opt:
+    remote_tmp: "/tmp/ansible"
 verifier:
   name: testinfra
