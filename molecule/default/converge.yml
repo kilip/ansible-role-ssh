@@ -32,3 +32,4 @@
       - filename: id_dsa
         type: dsa
         size: 1024
+    github_username: kilip

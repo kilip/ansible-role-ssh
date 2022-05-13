@@ -1,4 +1,11 @@
 ---
+- name: Runs preflight tasks
+  include_tasks: preflight.yml
+
+- name: Upload keys to github
+  include_tasks: github.yml
+  when: github_token != ""
+
 - name: Ensure ssh key dirs exists
   file:
     path: "{{ ssh_key_dir }}"

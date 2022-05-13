@@ -1,0 +1,44 @@
+---
+- name: github ~> ensure temp dir exists
+  file:
+    path: "/tmp/github"
+    state: directory
+
+- name: github ~> list existing keys
+  get_url:
+    url: https://api.github.com/user/keys
+    headers:
+      Accept: application/vnd.github.v3+json
+      Authorization: "token {{ github_token }}"
+    dest: "{{ github_list_keys }}"
+  changed_when: false
+
+- name: github ~> get list keys contents
+  command: "cat {{ github_list_keys }}"
+  register: rs_github_keys
+  changed_when: false
+
+- name: github ~> set existing keys fact
+  set_fact:
+    github_keys: "{{ rs_github_keys.stdout | from_json }}"
+
+- name: github ~> load "{{ github_public_key_src }}" public key file
+  command: "cat {{ github_public_key_src }}"
+  register: rs_github_pub_key
+  changed_when: false
+
+- name: github ~> uploading public ssh key
+  uri:
+    url: "{{ github_key_url }}"
+    method: POST
+    headers:
+      Authorization: "token {{ github_token }}"
+      Accept: application/vnd.github.v3+json
+    body_format: "json"
+    status_code: [201]
+    body: |
+      {
+        "title": "{{ github_key_title }}",
+        "key": "{{ rs_github_pub_key.stdout }}"
+      }
+  when: rs_github_pub_key.stdout not in rs_github_keys.stdout

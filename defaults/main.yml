@@ -9,3 +9,11 @@ ssh_key_dir: "/home/{{ ssh_key_user }}/.ssh"
 ssh_key_passphrase: ""
 ssh_key_force: false
 ssh_backup_dir: "files/ssh-keys/"
+
+github_temp_dir: "/tmp/github"
+github_list_keys: "{{ github_temp_dir }}/keys"
+github_key_title: "Ansible Uploaded Key"
+github_public_key_src: "{{ ssh_key_dir }}/id_rsa.pub"
+github_key_url: "https://api.github.com/user/keys"
+github_username: "test"
+github_token: ""

@@ -1,0 +1,6 @@
+---
+- name: Check github token from env variables
+  no_log: true
+  set_fact:
+    github_token: "{{ lookup('env','GITHUB_TOKEN') }}"
+  when: lookup('env', 'GITHUB_TOKEN') != ""

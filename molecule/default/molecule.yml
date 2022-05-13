@@ -1,6 +1,7 @@
 ---
 dependency:
   name: galaxy
+
 driver:
   name: docker
 platforms:
@@ -18,7 +19,11 @@ lint: |
 
 provisioner:
   name: ansible
+  log: true
+  env:
+    GITHUB_TOKEN: ${MOLECULE_GITHUB_TOKEN:-""}
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+
 verifier:
   name: testinfra
