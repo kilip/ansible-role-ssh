@@ -1,5 +1,4 @@
 ---
-# defaults file for ssh
 ssh_key_user: "root"
 ssh_key_type: rsa
 ssh_key_bits: 4096

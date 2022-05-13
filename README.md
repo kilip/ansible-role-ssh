@@ -2,6 +2,7 @@ Ansible Role: SSH
 =========
 Configure SSH Key
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kilip/ansible-role-ssh/CI?style=flat-square)
 
 Requirements
 ------------
@@ -9,7 +10,15 @@ None.
 
 Role Variables
 --------------
-
+```yaml
+ssh_key_user: "root"
+ssh_key_type: rsa
+ssh_key_bits: 4096
+ssh_key_dir: "/home/{{ ssh_key_user }}/.ssh"
+ssh_key_filename: "id_rsa"
+ssh_key_passphrase: ""
+ssh_key_force: false
+```
 
 Dependencies
 ------------
