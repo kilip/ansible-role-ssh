@@ -1,8 +1,4 @@
 ---
-# tasks file for ssh
-- debug:
-    var: ssh_key_dir
-
 - name: Ensure directory "{{ ssh_key_dir }}" exists
   file:
     path: "{{ ssh_key_dir }}"
