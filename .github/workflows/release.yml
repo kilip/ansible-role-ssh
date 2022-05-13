@@ -7,6 +7,10 @@ on:
   schedule:
     - cron: '10 10 10 * *'
 
+defaults:
+  run:
+    working-directory: 'kilip.ssh'
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -14,7 +18,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'geerlingguy.docker'
+          path: 'kilip.ssh'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
