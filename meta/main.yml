@@ -8,9 +8,18 @@ galaxy_info:
   min_ansible_version: 2.1
   platforms:
     - name: Ubuntu
-      versions: all
+      versions:
+        - 22.04
+        - 20.04
+        - 18.04
     - name: CentOS
-      versions: all
+      versions:
+        - 7
+    - name: Debian
+      versions:
+        - 12
+        - 11
+        - 10
   galaxy_tags:
     - ssh
     - system
