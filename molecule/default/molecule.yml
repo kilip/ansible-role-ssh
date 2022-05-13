@@ -11,6 +11,11 @@ platforms:
     command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+lint: >
+  set -e
+  ansible-lint
+
 provisioner:
   name: ansible
 verifier:
