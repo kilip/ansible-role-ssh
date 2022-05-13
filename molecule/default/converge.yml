@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+  pre_tasks:
+    - name: group ~> ensure group {{ ssh_key_user }} exists
+      group:
+        name: "{{ ssh_key_user }}"
+        state: present
+    - name: user ~> ensure user {{ ssh_key_user }} exists
+      user:
+        name: "{{ ssh_key_user }}"
+        state: present
+        group: "{{ ssh_key_user }}"
+        create_home: true
+        home: "/home/{{ ssh_key_user }}"
+  tasks:
+    - name: "Include kilip.ssh"
+      include_role:
+        name: "kilip.ssh"
+  vars:
+    ssh_key_user: toni

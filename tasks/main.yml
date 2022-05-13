@@ -1,0 +1,22 @@
+---
+# tasks file for ssh
+- debug:
+    var: ssh_key_dir
+
+- name: Ensure directory "{{ ssh_key_dir }}" exists
+  file:
+    path: "{{ ssh_key_dir }}"
+    mode: "0700"
+    owner: "{{ ssh_key_user }}"
+    group: "{{ ssh_key_user }}"
+    state: directory
+
+- name: generate SSH key "{{ ssh_key_dir }}/{{ ssh_key_filename }}"
+  become: true
+  become_user: "{{ ssh_key_user }}"
+  openssh_keypair:
+    path: "{{ ssh_key_dir }}/{{ ssh_key_filename }}"
+    type: rsa
+    size: 4096
+    state: present
+    force: false
