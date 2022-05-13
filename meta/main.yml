@@ -9,11 +9,13 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - 22.04
-        - 20.04
-        - 18.04
-    - name: CentOS
+        - jammy
+        - focal
+        - bionic
+    - name: EL
       versions:
+        - 9
+        - 8
         - 7
     - name: Debian
       versions:
