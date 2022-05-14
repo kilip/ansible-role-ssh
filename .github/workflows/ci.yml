@@ -33,12 +33,13 @@ jobs:
     strategy:
       matrix:
         distro:
-          - centos-7
           - ubuntu-22.04
           - ubuntu-20.04
-          - debian-9
-          - debian-10
           - debian-11
+          - debian-10
+          - debian-9
+          - centos-8
+          - centos-7
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
