@@ -6,10 +6,9 @@ driver:
   name: docker
 platforms:
   - name: ansible-role-ssh
-    image: "kilip/molecule-${MOLECULE_DISTRO:-ubuntu-20.04}:latest"
+    image: "kilip/molecule-${MOLECULE_DISTRO:-ubuntu-22.04}:latest"
     pre_build_image: true
     privileged: true
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 

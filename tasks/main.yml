@@ -1,8 +1,14 @@
 ---
-- name: Runs preflight tasks
+- name: ssh ~> Runs preflight tasks
   include_tasks: preflight.yml
 
-- name: Ensure ssh key dirs exists
+- name: ssh ~> ensure openssh installed
+  package:
+    name: "{{ ssh_packages }}"
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: ssh ~> ensure ssh key dirs exists
   file:
     path: "{{ ssh_key_dir }}"
     owner: "{{ ssh_key_user }}"
@@ -10,35 +16,43 @@
     mode: "0700"
     state: directory
 
-- name: Configures path
+- name: ssh ~> configures path
   set_fact:
     ssh_private: "{{ ssh_key_dir }}/{{ ssh_key_filename }}"
     ssh_private_backup: "{{ ssh_backup_dir }}/{{ ssh_key_filename }}"
     ssh_public: "{{ ssh_key_dir }}/{{ ssh_key_filename }}.pub"
     ssh_public_backup: "{{ ssh_backup_dir }}/{{ ssh_key_filename }}.pub"
 
-- name: Check existing backup keys
+- name: ssh ~> check existing backup keys
   local_action:
     module: stat
     path: "{{ ssh_private_backup }}"
   register: rs_ssh_backup
 
-- name: Check existing keys
+- name: ssh ~> check existing keys
   stat:
     path: "{{ ssh_private }}"
   register: rs_ssh_existing
 
-- name: Restore existing key
+- name: ssh ~> restore existing key
   include_tasks: restore.yml
   when: rs_ssh_backup.stat.exists
 
-- name: Generate new key
+- name: ssh ~> generate new key
   include_tasks: generate.yml
   when: not rs_ssh_backup.stat.exists and not rs_ssh_existing.stat.exists
 
-- name: Backup existing key
+- name: ssh ~> add ssh key to agent
+  become: true
+  become_user: "{{ ssh_key_user }}"
+  shell: "eval '$(ssh-agent -s)' && ssh-add {{ ssh_private }}"
+  register: rs_ssh_agent
+  changed_when: rs_ssh_agent.rc == 0
+  failed_when: false
+
+- name: ssh ~> backup existing key
   include_tasks: backup.yml
 
-- name: Upload keys to github
+- name: ssh ~> upload keys to github
   include_tasks: github.yml
   when: github_token != ""

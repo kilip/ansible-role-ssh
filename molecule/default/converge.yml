@@ -13,6 +13,7 @@
         group: "{{ ssh_key_user }}"
         create_home: true
         home: "/home/{{ ssh_key_user }}"
+        shell: "/usr/bin/bash"
   tasks:
     - name: "Include kilip.ssh"
       vars:

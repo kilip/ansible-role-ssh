@@ -1,6 +1,22 @@
 ---
-- name: Check github token from env variables
+- name: ssh ~> check github token from env variables
   no_log: true
   set_fact:
     github_token: "{{ lookup('env','GITHUB_TOKEN') }}"
   when: lookup('env', 'GITHUB_TOKEN') != ""
+
+- name: ssh ~> update apt cache.
+  apt: update_cache=yes cache_valid_time=600
+  when: ansible_os_family == "Debian"
+
+- name: ssh ~> set required packages for Debian
+  set_fact:
+    ssh_packages:
+      - openssh-client
+  when: ansible_os_family == "Debian"
+
+- name: ssh ~> set required packages RedHat
+  set_fact:
+    ssh_packages:
+      - openssh-clients
+  when: ansible_os_family == "RedHat"
