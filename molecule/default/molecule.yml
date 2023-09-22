@@ -21,7 +21,7 @@ provisioner:
     defaults:
       vault_password_file: "${MOLECULE_SCENARIO_DIRECTORY}/vault.txt"
   options:
-    D: true
+    D: false
 
 verifier:
   name: ansible
