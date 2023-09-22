@@ -3,6 +3,7 @@ name: CI
 
 on:  # yamllint disable-line rule:truthy
   pull_request:
+    branches: ["main"]
   push:
     branches: ["main", "1.x"]
 
@@ -10,4 +11,4 @@ jobs:
   testing:
     uses: kilip/gh-common/.github/workflows/ansible-testing.yml@main
     with:
-      dists: ubuntu-22.04
+      dists: ubuntu-22.04,debian-12
