@@ -4,8 +4,11 @@ name: CI
 on:  # yamllint disable-line rule:truthy
   pull_request:
     branches: ["main"]
+    paths-ignore:
+      - 'README.md'
   push:
     branches: ["main", "1.x"]
+
 
 jobs:
   testing:

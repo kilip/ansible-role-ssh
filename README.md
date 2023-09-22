@@ -6,20 +6,16 @@ Ansible role ssh
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/kilip/ansible-role-ssh?style=flat-square)](https://github.com/kilip/ansible-role-ssh/releases)
 [![GitHub](https://img.shields.io/github/license/kilip/ansible-role-ssh?style=flat-square)](https://github.com/kilip/ansible-role-ssh/blob/main/LICENSE)
 
-Requirements
-------------
-
-None.
-
 Role Variables
 --------------
-
-None
-
-Dependencies
-------------
-
-Define dependencies here
+Here's role variables with default values:
+```yaml
+ssh_user: "" # required and must be set
+ssh_user_group: "{{ ssh_user }}"
+ssh_dir: "/home/{{ ssh_user }}/.ssh"
+ssh_private_key: "ssh/id_rsa"
+ssh_public_key: "{{ ssh_private_key }}.pub"
+```
 
 Example Playbook
 ----------------
