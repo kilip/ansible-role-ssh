@@ -3,6 +3,22 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Example assertion
+    # private key
+    - ansible.builtin.stat:
+        path: "/home/testing/.ssh/id_rsa"
+      register: stat_private_key
+      become: true
+      become_user: "testing"
+    - name: Ensure private key copied
       ansible.builtin.assert:
-        that: true
+        that: stat_private_key.stat.exists
+
+    # public key
+    - ansible.builtin.stat:
+        path: "/home/testing/.ssh/id_rsa.pub"
+      register: stat_public_key
+      become: true
+      become_user: "testing"
+    - name: Ensure public key copied
+      ansible.builtin.assert:
+        that: stat_public_key.stat.exists

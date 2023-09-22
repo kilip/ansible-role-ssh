@@ -1,2 +1,8 @@
 ---
 # defaults file for ssh
+
+ssh_user: ""
+ssh_user_group: "{{ ssh_user }}"
+ssh_dir: "/home/{{ ssh_user }}/.ssh"
+ssh_private_key: "ssh/id_rsa"
+ssh_public_key: "{{ ssh_private_key }}.pub"
