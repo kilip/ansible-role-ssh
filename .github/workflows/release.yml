@@ -1,0 +1,19 @@
+---
+name: Release
+
+on:  # yamllint disable-line rule:truthy
+  workflow_run:
+    workflows: ["Testing"]
+    branches: ["1.x"]
+    types:
+      - completed
+
+jobs:
+  release:
+    name: Create Release
+    uses: kilip/gh-common/.github/workflows/ansible-release.yml@main
+    secrets: inherit
+    permissions:
+      contents: write
+    with:
+      release_branches: main,1.x
