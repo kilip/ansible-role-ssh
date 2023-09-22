@@ -1,7 +1,8 @@
 ---
-name: Testing
+name: CI
 
 on:  # yamllint disable-line rule:truthy
+  pull_request:
   push:
     branches: ["main", "1.x"]
 
