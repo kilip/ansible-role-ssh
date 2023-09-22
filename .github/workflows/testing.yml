@@ -11,4 +11,4 @@ jobs:
   testing:
     uses: kilip/gh-common/.github/workflows/ansible-testing.yml@main
     with:
-      dists: ubuntu-22.04
+      dists: ubuntu-22.04,debian-12
