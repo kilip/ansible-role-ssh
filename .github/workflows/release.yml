@@ -2,11 +2,8 @@
 name: Release
 
 on:  # yamllint disable-line rule:truthy
-  workflow_run:
-    workflows: ["CI"]
+  push:
     branches: ["1.x"]
-    types:
-      - completed
 
 jobs:
   release:
