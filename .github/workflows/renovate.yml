@@ -31,3 +31,4 @@ jobs:
       configurationFile: ".github/renovate.json5"
       dryRun: "${{ inputs.dryRun || 'false' }}"
       renovateLogLevel: "${{ inputs.logLevel || 'error' }}"
+    secrets: inherit
